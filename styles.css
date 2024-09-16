@@ -1,0 +1,244 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --background-color: #ecf0f1;
+    --text-color: #34495e;
+    --animation-distance: -500px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.heading span {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+}
+
+.main-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form label {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.form input {
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
+}
+
+.back-btn {
+    display: none;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.back-btn:hover {
+    background-color: #34495e;
+}
+
+.horizontal-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.lift-simulation-container {
+    display: inline-block;
+    min-width: 100%;
+}
+
+.floors-container {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to bottom, #bdc3c7, #2c3e50);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.floors-container > div {
+    height: 122px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.floor-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-right: 2rem; 
+}
+
+.floor-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    min-width: 20px;
+}
+
+.floor-content {
+    display: flex;
+    gap: 1rem;
+}
+
+.lift-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.lift-button:hover {
+    background-color: #c0392b;
+}
+
+.lift {
+    position: relative;
+    width: 80px;
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--secondary-color);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-left: 6rem;
+}
+
+.lift-door {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: transform 2.5s ease-in-out;
+}
+
+.left-door {
+    left: 0;
+}
+
+.right-door {
+    right: 0;
+}
+
+.left-move {
+    transform: translateX(-100%);
+}
+
+.right-move {
+    transform: translateX(100%);
+}
+
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .heading {
+        font-size: 2rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .main-container {
+        padding: 1.5rem;
+    }
+
+    .form input,
+    .submit-btn,
+    .back-btn {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+}
