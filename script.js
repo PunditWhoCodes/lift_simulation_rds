@@ -149,40 +149,52 @@ function generateLifts(numLifts) {
     function moveLift(floorNo, lift, direction) {
         const liftElement = document.getElementById(lift.liftId);
         const currentFloor = lift.currentFloor;
-        const totalDuration = Math.abs(floorNo - currentFloor) * 2;
+        
+        // CHANGE: Calculate duration based on 2 seconds per floor
+        const floorsToTravel = Math.abs(floorNo - currentFloor);
+        const totalDuration = floorsToTravel * 2.3; // 2 seconds per floor
+    
         lift.moving = true;
         lift.stops.push(floorNo);
-        lift.direction = direction;  // Set the direction the lift is moving
-        liftElement.style.transition = `all ${totalDuration}s`;
+        lift.direction = direction;
+        
+        liftElement.style.transition = `transform ${totalDuration}s linear`;
         liftElement.style.transform = `translateY(-${(floorNo - 1) * 124}px)`;
     
         setTimeout(() => {
             openAndCloseDoors(floorNo, lift);
-        }, totalDuration * 2000);
+        }, totalDuration * 1000);
     }
     
     function openAndCloseDoors(floorNo, lift) {
-        let liftEl = document.getElementById(lift.liftId);
-        let leftDoor = liftEl.querySelector('.left-door');
-        let rightDoor = liftEl.querySelector('.right-door');
+        const liftEl = document.getElementById(lift.liftId);
+        const leftDoor = liftEl.querySelector('.left-door');
+        const rightDoor = liftEl.querySelector('.right-door');
     
         leftDoor.classList.add('left-move');
         rightDoor.classList.add('right-move');
+        
         setTimeout(() => {
             leftDoor.classList.remove('left-move');
             rightDoor.classList.remove('right-move');
+            
             setTimeout(() => {
                 lift.currentFloor = floorNo;
                 lift.moving = false;
-                lift.direction = null; // Reset direction once the lift stops
+                lift.direction = null;
+                
                 const index = lift.stops.indexOf(floorNo);
                 if (index !== -1) {
                     lift.stops.splice(index, 1);
                 }
-                if (pendingQueue.length > 0) {
-                    let { floorNo: newFloorNo, direction: newDirection } = pendingQueue[0];
-                    pendingQueue.shift();
-                    moveLift(newFloorNo, lift, newDirection);
+                
+                if (lift.stops.length > 0) {
+                    const nextStop = lift.stops[0];
+                    const nextDirection = nextStop > floorNo ? 'up' : 'down';
+                    moveLift(nextStop, lift, nextDirection);
+                } else if (pendingQueue.length > 0) {
+                    const nextRequest = pendingQueue.shift();
+                    moveLift(nextRequest.floorNo, lift, nextRequest.direction);
                 }
             }, 2500);
         }, 2500);
