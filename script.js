@@ -158,7 +158,7 @@ function generateLifts(numLifts) {
     
         setTimeout(() => {
             openAndCloseDoors(floorNo, lift);
-        }, totalDuration * 1000);
+        }, totalDuration * 2000);
     }
     
     function openAndCloseDoors(floorNo, lift) {
